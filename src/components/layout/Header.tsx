@@ -32,15 +32,20 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 
 export function Header() {
-  const { logout } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
   const router = useRouter();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [showFeatures, setShowFeatures] = useState(false);
   const featuresRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const handleLogout = () => {
     logout();
-    router.push("/");
+    router.push("/login");
   };
 
   const toggleTheme = () => {
@@ -67,6 +72,10 @@ export function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [featuresRef]);
+
+  if (isLoggedIn === undefined || !isLoggedIn) {
+    return null; // Don't render the header if not logged in or if login state is unknown
+  }
 
   return (
     <header className="bg-background/95 backdrop-blur-sm border-b dark:border-gray-700 sticky top-0 z-50">
@@ -130,19 +139,21 @@ export function Header() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            className="text-foreground hover:bg-accent hover:text-accent-foreground"
-          >
-            {theme === "dark" ? (
-              <Sun className="h-5 w-5" />
-            ) : (
-              <Moon className="h-5 w-5" />
-            )}
-            <span className="sr-only">Toggle theme</span>
-          </Button>
+          {mounted && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="text-foreground hover:bg-accent hover:text-accent-foreground"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
