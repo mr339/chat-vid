@@ -12,26 +12,31 @@ export default function VideoFeature() {
   const [selectedVideo, setSelectedVideo] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [transcription, setTranscription] = useState<string | null>(null);
-  const [isDeciphering, setIsDeciphering] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [isFFmpegLoaded, setIsFFmpegLoaded] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const ffmpegRef = useRef(new FFmpeg());
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const ffmpegRef = useRef<FFmpeg | null>(null);
 
   useEffect(() => {
-    load();
+    const loadFFmpeg = async () => {
+      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+      const ffmpeg = new FFmpeg();
+      ffmpegRef.current = ffmpeg;
+      await ffmpeg.load({
+        coreURL: await toBlobURL(
+          `${baseURL}/ffmpeg-core.js`,
+          "text/javascript"
+        ),
+        wasmURL: await toBlobURL(
+          `${baseURL}/ffmpeg-core.wasm`,
+          "application/wasm"
+        ),
+      });
+      setIsFFmpegLoaded(true);
+    };
+    loadFFmpeg();
   }, []);
-
-  const load = async () => {
-    const baseURL = "https://unpkg.com/@ffmpeg/core@0.11.0/dist/umd";
-    const ffmpeg = ffmpegRef.current;
-    ffmpeg.on("log", ({ message }) => console.log(message));
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-      wasmURL: await toBlobURL(
-        `${baseURL}/ffmpeg-core.wasm`,
-        "application/wasm"
-      ),
-    });
-  };
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -48,14 +53,15 @@ export default function VideoFeature() {
     fileInputRef.current?.click();
   };
 
-  const handleDecipher = async () => {
-    if (!selectedVideo) return;
-    setIsDeciphering(true);
+  const handleTranscribe = async () => {
+    if (!selectedVideo || !ffmpegRef.current) return;
+    setIsTranscribing(true);
 
     try {
-      // Extract audio
       const ffmpeg = ffmpegRef.current;
       await ffmpeg.writeFile("input.mp4", await fetchFile(selectedVideo));
+
+      // Extract audio
       await ffmpeg.exec([
         "-i",
         "input.mp4",
@@ -68,35 +74,47 @@ export default function VideoFeature() {
         "1",
         "output.wav",
       ]);
-      const data = await ffmpeg.readFile("output.wav");
-      const audioBlob = new Blob([data], { type: "audio/wav" });
 
-      // Send audio to server for transcription
-      const formData = new FormData();
-      formData.append("audio", audioBlob, "audio.wav");
+      // Read the WAV file
+      const audioData = await ffmpeg.readFile("output.wav");
+      const audioBlob = new Blob([audioData], { type: "audio/wav" });
+      const audioUrl = URL.createObjectURL(audioBlob);
 
-      const response = await fetch("/api/transcribe", {
-        method: "POST",
-        body: formData,
-      });
+      // Use Web Speech API for transcription
+      const recognition = new (window.SpeechRecognition ||
+        window.webkitSpeechRecognition)();
+      recognition.lang = "en-US";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
 
-      if (!response.ok) {
-        throw new Error("Transcription failed");
-      }
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setTranscription(transcript);
+      };
 
-      const result = await response.json();
-      setTranscription(result.text);
+      recognition.onerror = (event) => {
+        console.error("Error during transcription:", event.error);
+        setIsTranscribing(false);
+      };
+
+      recognition.onend = () => {
+        setIsTranscribing(false);
+      };
+
+      const audio = new Audio(audioUrl);
+      audio.oncanplaythrough = () => {
+        recognition.start();
+        audio.play();
+      };
     } catch (error) {
-      console.error("Error during deciphering:", error);
-      alert("An error occurred during deciphering. Please try again.");
-    } finally {
-      setIsDeciphering(false);
+      console.error("Error during transcription:", error);
+      alert("An error occurred during transcription. Please try again.");
+      setIsTranscribing(false);
     }
   };
 
   const handleDownloadTranscription = () => {
     if (!transcription) return;
-
     const blob = new Blob([transcription], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -139,6 +157,7 @@ export default function VideoFeature() {
               <div className="w-full h-full flex flex-col">
                 <div className="flex-grow relative">
                   <video
+                    ref={videoRef}
                     src={videoUrl}
                     controls
                     className="absolute inset-0 w-full h-full object-contain"
@@ -157,12 +176,12 @@ export default function VideoFeature() {
                     Upload Another Video
                   </Button>
                   <Button
-                    onClick={handleDecipher}
+                    onClick={handleTranscribe}
                     className="bg-green-600 hover:bg-green-700"
-                    disabled={isDeciphering}
+                    disabled={isTranscribing || !isFFmpegLoaded}
                   >
                     <FileText className="w-4 h-4 mr-2" />
-                    {isDeciphering ? "Deciphering..." : "Decipher"}
+                    {isTranscribing ? "Transcribing..." : "Transcribe"}
                   </Button>
                   {transcription && (
                     <Button
@@ -174,6 +193,12 @@ export default function VideoFeature() {
                     </Button>
                   )}
                 </div>
+                {transcription && (
+                  <div className="mt-4 p-4 bg-gray-100 rounded-md">
+                    <h3 className="font-bold mb-2">Transcription:</h3>
+                    <p>{transcription}</p>
+                  </div>
+                )}
               </div>
             )}
           </CardContent>

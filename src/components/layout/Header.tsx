@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   User,
   Settings,
@@ -13,9 +14,11 @@ import {
   Video,
   Mic,
   FileText,
-  Image,
+  Image as ImageIcon,
   Music,
   Code,
+  Bell,
+  HelpCircle,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -44,6 +47,11 @@ export function Header() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+  const handleFeatureClick = (feature: string) => {
+    setShowFeatures(false);
+    router.push(`/features/${feature.toLowerCase()}`);
+  };
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -60,15 +68,15 @@ export function Header() {
     };
   }, [featuresRef]);
 
-  const handleFeatureClick = (feature: string) => {
-    setShowFeatures(false);
-    router.push(`/features/${feature.toLowerCase()}`);
-  };
-
   return (
-    <header className="bg-background border-b dark:border-gray-700">
+    <header className="bg-background/95 backdrop-blur-sm border-b dark:border-gray-700 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-foreground">Composer</h1>
+        <Link
+          href="/dashboard"
+          className="text-xl font-bold text-foreground hover:text-accent-foreground transition-colors"
+        >
+          Composer
+        </Link>
 
         <div className="relative" ref={featuresRef}>
           <Button
@@ -102,7 +110,7 @@ export function Header() {
                   onClick={() => handleFeatureClick("Text")}
                 />
                 <FeatureItem
-                  icon={<Image className="mr-2 h-4 w-4" />}
+                  icon={<ImageIcon className="mr-2 h-4 w-4" />}
                   text="Image"
                   onClick={() => handleFeatureClick("Image")}
                 />
@@ -140,32 +148,50 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-foreground hover:bg-accent hover:text-accent-foreground"
+                className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
               >
                 <User className="h-5 w-5" />
-                <span className="sr-only">Open user menu</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end">
+            <DropdownMenuContent
+              className="w-64 p-2 mt-2 bg-background/95 backdrop-blur-sm"
+              align="end"
+            >
               <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">John Doe</p>
-                  <p className="text-xs leading-none text-muted-foreground">
-                    john@example.com
-                  </p>
+                <div className="flex items-center space-x-3 p-2">
+                  <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                    <User className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="text-sm font-medium leading-none">John Doe</p>
+                    <p className="text-xs text-muted-foreground">
+                      john@example.com
+                    </p>
+                  </div>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem className="p-2 hover:bg-accent/50 rounded-md cursor-pointer">
                 <User className="mr-2 h-4 w-4" />
                 <span>My Profile</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="p-2 hover:bg-accent/50 rounded-md cursor-pointer">
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Settings</span>
               </DropdownMenuItem>
+              <DropdownMenuItem className="p-2 hover:bg-accent/50 rounded-md cursor-pointer">
+                <Bell className="mr-2 h-4 w-4" />
+                <span>Notifications</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="p-2 hover:bg-accent/50 rounded-md cursor-pointer">
+                <HelpCircle className="mr-2 h-4 w-4" />
+                <span>Help & Support</span>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout}>
+              <DropdownMenuItem
+                className="p-2 hover:bg-accent/50 rounded-md text-red-500 hover:text-red-600 cursor-pointer"
+                onClick={handleLogout}
+              >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>
               </DropdownMenuItem>

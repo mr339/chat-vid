@@ -1,32 +1,39 @@
-import { NextResponse } from "next/server";
-import OpenAI from "openai";
+import { NextRequest, NextResponse } from "next/server";
+import { Model } from "deepspeech";
+import path from "path";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-export async function POST(request: Request) {
-  const formData = await request.formData();
-  const audioFile = formData.get("audio") as File;
-
-  if (!audioFile) {
-    return NextResponse.json(
-      { error: "No audio file provided" },
-      { status: 400 }
-    );
-  }
-
+export async function POST(req: NextRequest) {
   try {
-    const transcription = await openai.audio.transcriptions.create({
-      file: await audioFile.arrayBuffer(),
-      model: "whisper-1",
-    });
+    const data = await req.arrayBuffer();
+    if (!data || data.byteLength === 0) {
+      throw new Error("No audio data received");
+    }
 
-    return NextResponse.json({ text: transcription.text });
-  } catch (error) {
+    const audioBuffer = new Int16Array(data);
+
+    // Log the audio buffer details
+    console.log("Audio buffer received. Length:", audioBuffer.length);
+
+    const modelPath = path.join(process.cwd(), "path/to/model.pbmm");
+    const scorerPath = path.join(process.cwd(), "path/to/scorer.scorer");
+
+    console.log("Loading DeepSpeech model from:", modelPath);
+    console.log("Loading DeepSpeech scorer from:", scorerPath);
+
+    const model = new Model(modelPath);
+    model.enableExternalScorer(scorerPath);
+
+    console.log("Model loaded successfully. Starting transcription...");
+
+    const transcription = model.stt(audioBuffer);
+
+    console.log("Transcription completed:", transcription);
+
+    return NextResponse.json({ transcription });
+  } catch (error: any) {
     console.error("Error during transcription:", error);
     return NextResponse.json(
-      { error: "Transcription failed" },
+      { error: `Error during transcription: ${error.message}` },
       { status: 500 }
     );
   }
