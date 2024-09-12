@@ -1,0 +1,38 @@
+{
+  "HomePage": {
+    "composer": "Composer"
+  },
+  "Header": {
+    "title": "Composer",
+    "features": "Features",
+    "myProfile": "My Profile",
+    "settings": "Settings",
+    "logOut": "Log out",
+    "video": "Video",
+    "audio": "Audio",
+    "text": "Text",
+    "image": "Image",
+    "music": "Music",
+    "code": "Code",
+    "greeting": "Hello, {name}",
+    "email": "{email}",
+    "userName": "John Doe",
+    "userEmail": "john@example.com",
+    "toggleTheme": "Toggle theme",
+    "openUserMenu": "Open user menu",
+    "switchLanguage": "Switch language"
+  },
+  "Dashboard": {
+    "title": "Dashboard",
+    "monthlySales": "Monthly Sales",
+    "productSalesDistribution": "Product Sales Distribution",
+    "revenueComparison": "Revenue Comparison",
+    "recentTransactions": "Recent Transactions",
+    "date": "Date",
+    "transactionId": "Transaction ID",
+    "amount": "Amount",
+    "status": "Status",
+    "completed": "Completed",
+    "pending": "Pending"
+  }
+}

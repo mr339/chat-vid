@@ -13,6 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { useTranslations } from "next-intl";
 
 const salesData = [
   { month: "Jan", sales: 4000 },
@@ -64,14 +65,16 @@ const revenueData = [
 ];
 
 export default function Dashboard() {
+  const t = useTranslations("Dashboard");
+
   return (
     <ProtectedRoute>
       <div className="container mx-auto mt-8 px-4">
-        <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
+        <h1 className="text-3xl font-bold mb-8">{t("title")}</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <Card>
-            <Title>Monthly Sales</Title>
+            <Title>{t("monthlySales")}</Title>
             <BarChart
               className="mt-6"
               data={salesData}
@@ -83,7 +86,7 @@ export default function Dashboard() {
           </Card>
 
           <Card>
-            <Title>Product Sales Distribution</Title>
+            <Title>{t("productSalesDistribution")}</Title>
             <DonutChart
               className="mt-6"
               data={productData}
@@ -95,7 +98,7 @@ export default function Dashboard() {
         </div>
 
         <Card className="mb-8">
-          <Title>Revenue Comparison</Title>
+          <Title>{t("revenueComparison")}</Title>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart
               data={revenueData}
@@ -123,22 +126,22 @@ export default function Dashboard() {
         </Card>
 
         <Card>
-          <Title>Recent Transactions</Title>
+          <Title>{t("recentTransactions")}</Title>
           <div className="mt-6 overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Date
+                    {t("date")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Transaction ID
+                    {t("transactionId")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Amount
+                    {t("amount")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
+                    {t("status")}
                   </th>
                 </tr>
               </thead>
@@ -163,7 +166,7 @@ export default function Dashboard() {
                             : "bg-yellow-100 text-yellow-800"
                         }`}
                       >
-                        {index % 2 === 0 ? "Completed" : "Pending"}
+                        {index % 2 === 0 ? t("completed") : t("pending")}
                       </span>
                     </td>
                   </tr>

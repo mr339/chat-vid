@@ -28,13 +28,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 
-export function Header() {
+export function Header({
+  switchLanguage,
+}: {
+  switchLanguage: (locale: string) => void;
+}) {
   const { logout } = useAuth();
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [showFeatures, setShowFeatures] = useState(false);
   const featuresRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("Header");
+  const locale = useLocale();
 
   const handleLogout = () => {
     logout();
@@ -70,7 +77,7 @@ export function Header() {
     <header className="bg-background border-b dark:border-gray-700">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
         <Link href="/dashboard" className="cursor-pointer">
-          <h1 className="text-xl font-bold text-foreground">Composer</h1>
+          <h1 className="text-xl font-bold text-foreground">{t("title")}</h1>
         </Link>
 
         <div className="relative" ref={featuresRef}>
@@ -79,7 +86,7 @@ export function Header() {
             className="text-foreground hover:bg-accent hover:text-accent-foreground"
             onClick={() => setShowFeatures(!showFeatures)}
           >
-            Features{" "}
+            {t("features")}{" "}
             <ChevronDown
               className={`ml-2 h-4 w-4 transition-transform duration-200 ${
                 showFeatures ? "rotate-180" : ""
@@ -91,32 +98,32 @@ export function Header() {
               <div className="p-2 grid grid-cols-2 gap-2">
                 <FeatureItem
                   icon={<Video className="mr-2 h-4 w-4" />}
-                  text="Video"
+                  text={t("video")}
                   onClick={() => handleFeatureClick("Video")}
                 />
                 <FeatureItem
                   icon={<Mic className="mr-2 h-4 w-4" />}
-                  text="Audio"
+                  text={t("audio")}
                   onClick={() => handleFeatureClick("Audio")}
                 />
                 <FeatureItem
                   icon={<FileText className="mr-2 h-4 w-4" />}
-                  text="Text"
+                  text={t("text")}
                   onClick={() => handleFeatureClick("Text")}
                 />
                 <FeatureItem
                   icon={<Image className="mr-2 h-4 w-4" />}
-                  text="Image"
+                  text={t("image")}
                   onClick={() => handleFeatureClick("Image")}
                 />
                 <FeatureItem
                   icon={<Music className="mr-2 h-4 w-4" />}
-                  text="Music"
+                  text={t("music")}
                   onClick={() => handleFeatureClick("Music")}
                 />
                 <FeatureItem
                   icon={<Code className="mr-2 h-4 w-4" />}
-                  text="Code"
+                  text={t("code")}
                   onClick={() => handleFeatureClick("Code")}
                 />
               </div>
@@ -136,7 +143,7 @@ export function Header() {
             ) : (
               <Moon className="h-5 w-5" />
             )}
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">{t("toggleTheme")}</span>
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -146,26 +153,28 @@ export function Header() {
                 className="text-foreground hover:bg-accent hover:text-accent-foreground"
               >
                 <User className="h-5 w-5" />
-                <span className="sr-only">Open user menu</span>
+                <span className="sr-only">{t("openUserMenu")}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end">
               <DropdownMenuLabel className="font-normal cursor-default">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">John Doe</p>
+                  <p className="text-sm font-medium leading-none">
+                    {t("userName")}
+                  </p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    john@example.com
+                    {t("userEmail")}
                   </p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer">
                 <User className="mr-2 h-4 w-4" />
-                <span>My Profile</span>
+                <span>{t("myProfile")}</span>
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">
                 <Settings className="mr-2 h-4 w-4" />
-                <span>Settings</span>
+                <span>{t("settings")}</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -173,7 +182,23 @@ export function Header() {
                 className="cursor-pointer"
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
+                <span>{t("logOut")}</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon">
+                {locale === "en" ? "EN" : "NP"}
+                <span className="sr-only">{t("switchLanguage")}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => switchLanguage("en")}>
+                English
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => switchLanguage("np")}>
+                नेपाली (Nepali)
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

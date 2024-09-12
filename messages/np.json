@@ -1,0 +1,38 @@
+{
+  "HomePage": {
+    "composer": "कम्पोजर"
+  },
+  "Header": {
+    "title": "कम्पोजर",
+    "features": "सुविधाहरू",
+    "myProfile": "मेरो प्रोफाइल",
+    "settings": "सेटिङहरू",
+    "logOut": "लग आउट",
+    "video": "भिडियो",
+    "audio": "अडियो",
+    "text": "पाठ",
+    "image": "तस्वीर",
+    "music": "संगीत",
+    "code": "कोड",
+    "greeting": "नमस्ते, {name}",
+    "email": "{email}",
+    "userName": "जोन डो",
+    "userEmail": "john@example.com",
+    "toggleTheme": "थिम परिवर्तन गर्नुहोस्",
+    "openUserMenu": "प्रयोगकर्ता मेनु खोल्नुहोस्",
+    "switchLanguage": "भाषा परिवर्तन गर्नुहोस्"
+  },
+  "Dashboard": {
+    "title": "ड्यासबोर्ड",
+    "monthlySales": "मासिक बिक्री",
+    "productSalesDistribution": "उत्पादन बिक्री वितरण",
+    "revenueComparison": "राजस्व तुलना",
+    "recentTransactions": "हालैका कारोबारहरू",
+    "date": "मिति",
+    "transactionId": "कारोबार आईडी",
+    "amount": "रकम",
+    "status": "स्थिति",
+    "completed": "पूरा भयो",
+    "pending": "प्रक्रियामा"
+  }
+}
