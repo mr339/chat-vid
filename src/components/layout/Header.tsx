@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export function Header() {
   const { logout } = useAuth();
@@ -68,7 +69,9 @@ export function Header() {
   return (
     <header className="bg-background border-b dark:border-gray-700">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-foreground">Composer</h1>
+        <Link href="/dashboard" className="cursor-pointer">
+          <h1 className="text-xl font-bold text-foreground">Composer</h1>
+        </Link>
 
         <div className="relative" ref={featuresRef}>
           <Button
@@ -147,7 +150,7 @@ export function Header() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end">
-              <DropdownMenuLabel className="font-normal">
+              <DropdownMenuLabel className="font-normal cursor-default">
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">John Doe</p>
                   <p className="text-xs leading-none text-muted-foreground">
@@ -156,16 +159,19 @@ export function Header() {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
                 <User className="mr-2 h-4 w-4" />
                 <span>My Profile</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Settings</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout}>
+              <DropdownMenuItem
+                onClick={handleLogout}
+                className="cursor-pointer"
+              >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>
               </DropdownMenuItem>
