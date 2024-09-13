@@ -1,0 +1,38 @@
+{
+  "HomePage": {
+    "composer": "संगीतकार"
+  },
+  "Header": {
+    "title": "संगीतकार",
+    "features": "विशेषताएँ",
+    "myProfile": "मेरी प्रोफ़ाइल",
+    "settings": "सेटिंग्स",
+    "logOut": "लॉग आउट",
+    "video": "वीडियो",
+    "audio": "ऑडियो",
+    "text": "पाठ",
+    "image": "छवि",
+    "music": "संगीत",
+    "code": "कोड",
+    "greeting": "नमस्ते, {name}",
+    "email": "{email}",
+    "userName": "जॉन डो",
+    "userEmail": "john@example.com",
+    "toggleTheme": "थीम बदलें",
+    "openUserMenu": "उपयोगकर्ता मेनू खोलें",
+    "switchLanguage": "भाषा बदलें"
+  },
+  "Dashboard": {
+    "title": "डैशबोर्ड",
+    "monthlySales": "मासिक बिक्री",
+    "productSalesDistribution": "उत्पाद बिक्री वितरण",
+    "revenueComparison": "राजस्व तुलना",
+    "recentTransactions": "हाल के लेन-देन",
+    "date": "तारीख",
+    "transactionId": "लेन-देन आईडी",
+    "amount": "राशि",
+    "status": "स्थिति",
+    "completed": "पूर्ण",
+    "pending": "लंबित"
+  }
+}
