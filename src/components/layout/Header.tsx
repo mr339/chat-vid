@@ -188,17 +188,48 @@ export function Header({
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
-                {locale === "en" ? "EN" : "NP"}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-foreground hover:bg-accent hover:text-accent-foreground"
+              >
+                {locale === "en"
+                  ? "EN"
+                  : locale === "np"
+                  ? "NP"
+                  : locale === "fr"
+                  ? "FR"
+                  : "JA"}
                 <span className="sr-only">{t("switchLanguage")}</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => switchLanguage("en")}>
+            <DropdownMenuContent
+              align="end"
+              className="bg-background border border-border"
+            >
+              <DropdownMenuItem
+                onClick={() => switchLanguage("en")}
+                className="cursor-pointer"
+              >
                 English
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => switchLanguage("np")}>
+              <DropdownMenuItem
+                onClick={() => switchLanguage("np")}
+                className="cursor-pointer"
+              >
                 नेपाली (Nepali)
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => switchLanguage("fr")}
+                className="cursor-pointer"
+              >
+                Français (French)
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => switchLanguage("ja")}
+                className="cursor-pointer"
+              >
+                日本語 (Japanese)
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -1,0 +1,38 @@
+{
+  "HomePage": {
+    "composer": "Compositeur"
+  },
+  "Header": {
+    "title": "Compositeur",
+    "features": "Fonctionnalités",
+    "myProfile": "Mon Profil",
+    "settings": "Paramètres",
+    "logOut": "Se déconnecter",
+    "video": "Vidéo",
+    "audio": "Audio",
+    "text": "Texte",
+    "image": "Image",
+    "music": "Musique",
+    "code": "Code",
+    "greeting": "Bonjour, {name}",
+    "email": "{email}",
+    "userName": "Jean Dupont",
+    "userEmail": "jean@exemple.com",
+    "toggleTheme": "Changer de thème",
+    "openUserMenu": "Ouvrir le menu utilisateur",
+    "switchLanguage": "Changer de langue"
+  },
+  "Dashboard": {
+    "title": "Tableau de bord",
+    "monthlySales": "Ventes mensuelles",
+    "productSalesDistribution": "Répartition des ventes de produits",
+    "revenueComparison": "Comparaison des revenus",
+    "recentTransactions": "Transactions récentes",
+    "date": "Date",
+    "transactionId": "ID de transaction",
+    "amount": "Montant",
+    "status": "Statut",
+    "completed": "Terminé",
+    "pending": "En attente"
+  }
+}

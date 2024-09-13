@@ -1,0 +1,38 @@
+{
+  "HomePage": {
+    "composer": "コンポーザー"
+  },
+  "Header": {
+    "title": "コンポーザー",
+    "features": "機能",
+    "myProfile": "マイプロフィール",
+    "settings": "設定",
+    "logOut": "ログアウト",
+    "video": "ビデオ",
+    "audio": "オーディオ",
+    "text": "テキスト",
+    "image": "画像",
+    "music": "音楽",
+    "code": "コード",
+    "greeting": "こんにちは、{name}さん",
+    "email": "{email}",
+    "userName": "山田太郎",
+    "userEmail": "taro@example.com",
+    "toggleTheme": "テーマ切り替え",
+    "openUserMenu": "ユーザーメニューを開く",
+    "switchLanguage": "言語を切り替える"
+  },
+  "Dashboard": {
+    "title": "ダッシュボード",
+    "monthlySales": "月間売上",
+    "productSalesDistribution": "製品売上分布",
+    "revenueComparison": "収益比較",
+    "recentTransactions": "最近の取引",
+    "date": "日付",
+    "transactionId": "取引ID",
+    "amount": "金額",
+    "status": "状態",
+    "completed": "完了",
+    "pending": "保留中"
+  }
+}
