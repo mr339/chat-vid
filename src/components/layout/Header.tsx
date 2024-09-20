@@ -200,6 +200,7 @@ export function Header({
                   : locale === "fr"
                   ? "FR"
                   : "JA"}
+
                 <span className="sr-only">{t("switchLanguage")}</span>
               </Button>
             </DropdownMenuTrigger>
