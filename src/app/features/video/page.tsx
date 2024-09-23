@@ -7,6 +7,7 @@ import { Upload, FileText, Download } from "lucide-react";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import ReviewSection from "@/components/ReviewSection";
 
 export default function VideoFeature() {
   const [selectedVideo, setSelectedVideo] = useState<File | null>(null);
@@ -110,11 +111,11 @@ export default function VideoFeature() {
 
   return (
     <ProtectedRoute>
-      <div className="flex items-center justify-center min-h-[calc(100vh-64px)] bg-background p-4">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-background py-4">
         <Card
           className={`shadow-2xl overflow-hidden ${
             videoUrl ? "w-[80vw] h-[80vh]" : "w-[60vw] h-[60vh]"
-          } transition-all duration-300`}
+          } transition-all duration-300 mb-8`}
         >
           <CardContent className="flex flex-col items-center justify-center h-full p-6">
             {!videoUrl ? (
@@ -178,6 +179,7 @@ export default function VideoFeature() {
             )}
           </CardContent>
         </Card>
+        <ReviewSection />
       </div>
     </ProtectedRoute>
   );
