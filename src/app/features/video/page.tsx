@@ -7,7 +7,7 @@ import { Upload, FileText, Download } from "lucide-react";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
-import ReviewSection from "@/components/ReviewSection";
+import ReviewSection from "@/components/review/ReviewSection";
 
 export default function VideoFeature() {
   const [selectedVideo, setSelectedVideo] = useState<File | null>(null);

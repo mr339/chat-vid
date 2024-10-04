@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-interface ReviewProps {
-  rating: number;
-  review: string;
-  name: string;
-  profileImage: string;
-  summary: string | null;
-  showSummarizeButton: boolean;
-}
+import ReviewList from "./ReviewList";
 
 interface Review {
   rating: number;
@@ -19,129 +11,6 @@ interface Review {
   profileImage: string;
   summary: string | null;
 }
-
-const Review: React.FC<ReviewProps> = ({
-  rating,
-  review,
-  name,
-  profileImage,
-  summary,
-  showSummarizeButton,
-}) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [localSummary, setLocalSummary] = useState<string | null>(null);
-  const [isLocalSummarized, setIsLocalSummarized] = useState(false);
-
-  const generateLocalSummary = (text: string, rating: number): string => {
-    const sentiment =
-      rating > 3 ? "positive" : rating < 3 ? "negative" : "neutral";
-    const keyPoints = [
-      text.includes("accuracy") && `${sentiment} on accuracy`,
-      text.includes("speed") && "fast processing",
-      text.includes("time-sav") && "time-saving",
-      text.includes("user") &&
-        text.includes("interface") &&
-        "user-friendly interface",
-      text.includes("support") &&
-        `${text.includes("unhelpful") ? "poor" : "good"} support`,
-      text.includes("integrat") && "good integration",
-      text.includes("accent") && "handles accents well",
-      text.includes("edit") && "easy editing",
-      text.includes("pric") &&
-        `${text.includes("expensive") ? "high" : "reasonable"} pricing`,
-    ].filter(Boolean);
-
-    const uniqueFeatures = [
-      text.includes("multiple accents") && "supports multiple accents",
-      text.includes("automatic translation") && "includes auto-translation",
-      text.includes("timestamp") && "timestamp feature",
-      text.includes("multi-speaker") && "multi-speaker detection",
-      text.includes("batch processing") && "batch processing available",
-      text.includes("analytics") && "provides analytics",
-    ].filter(Boolean);
-
-    const summaryParts = [
-      `${
-        sentiment.charAt(0).toUpperCase() + sentiment.slice(1)
-      } ${rating}/5 review.`,
-      ...keyPoints.slice(0, 3),
-      ...uniqueFeatures.slice(0, 2),
-    ];
-
-    return (
-      summaryParts.join(" ").slice(0, 100).trim() +
-      (summaryParts.join(" ").length > 100 ? "..." : "")
-    );
-  };
-
-  const toggleLocalSummary = () => {
-    if (isLocalSummarized) {
-      setLocalSummary(null);
-    } else {
-      setLocalSummary(generateLocalSummary(review, rating));
-    }
-    setIsLocalSummarized(!isLocalSummarized);
-  };
-
-  return (
-    <Card className="w-full transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1 cursor-pointer">
-      <CardContent className="p-4">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`w-4 h-4 ${
-                  i < rating ? "text-yellow-400 fill-current" : "text-gray-300"
-                }`}
-              />
-            ))}
-          </div>
-          {showSummarizeButton && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={toggleLocalSummary}
-              className="text-xs"
-            >
-              {isLocalSummarized ? "Show Full" : "Summarize"}
-            </Button>
-          )}
-        </div>
-        {summary || localSummary ? (
-          <p className="text-sm text-gray-600 mb-2 bg-blue-100 dark:bg-blue-900 p-2 rounded">
-            {summary || localSummary}
-          </p>
-        ) : (
-          <>
-            <p
-              className={`text-sm text-gray-600 mb-2 ${
-                isExpanded ? "" : "line-clamp-3"
-              }`}
-            >
-              {review}
-            </p>
-            <Button
-              variant="link"
-              className="p-0 h-auto font-semibold text-blue-600 hover:text-blue-800"
-              onClick={() => setIsExpanded(!isExpanded)}
-            >
-              {isExpanded ? "See Less" : "See More"}
-            </Button>
-          </>
-        )}
-        <div className="flex items-center mt-2">
-          <img
-            src={profileImage}
-            alt={name}
-            className="w-8 h-8 rounded-full mr-2"
-          />
-          <span className="text-sm font-semibold">{name}</span>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
 
 const ReviewSection: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>([
@@ -292,15 +161,7 @@ const ReviewSection: React.FC = () => {
             {isSummarized ? "Show Details" : "Summarize"}
           </Button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {reviews.map((review, index) => (
-            <Review
-              key={index}
-              {...review}
-              showSummarizeButton={!isSummarized}
-            />
-          ))}
-        </div>
+        <ReviewList reviews={reviews} isSummarized={isSummarized} />
       </CardContent>
     </Card>
   );
