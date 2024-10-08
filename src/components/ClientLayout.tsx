@@ -4,11 +4,15 @@ import { useAuth } from "@/contexts/AuthContext";
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 
+interface ClientLayoutProps {
+  children: React.ReactNode;
+  switchLanguage: (locale: string) => void;
+}
+
 export default function ClientLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  switchLanguage,
+}: ClientLayoutProps) {
   const { isLoggedIn } = useAuth();
   const pathname = usePathname();
 
@@ -20,7 +24,7 @@ export default function ClientLayout({
 
   return (
     <>
-      {isLoggedIn && <Header />}
+      {isLoggedIn && <Header switchLanguage={switchLanguage} />}
       {children}
     </>
   );
