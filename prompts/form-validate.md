@@ -21,8 +21,8 @@ Follow these steps to create a form component with validation using Shadcn UI, R
 
    ```bash
    # For Shadcn UI
-   npx shadcn-ui@latest init
-   npx shadcn-ui@latest add form
+   npx shadcn@latest init
+   npx shadcn@latest add form
 
    # For React Hook Form and Zod
    npm install react-hook-form zod @hookform/resolvers
