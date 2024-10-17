@@ -20,7 +20,8 @@
     "userEmail": "taro@example.com",
     "toggleTheme": "テーマ切り替え",
     "openUserMenu": "ユーザーメニューを開く",
-    "switchLanguage": "言語を切り替える"
+    "switchLanguage": "言語を切り替える",
+    "signup": "フォーム"
   },
   "Dashboard": {
     "title": "ダッシュボード",

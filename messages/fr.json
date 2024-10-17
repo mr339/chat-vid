@@ -20,7 +20,8 @@
     "userEmail": "jean@exemple.com",
     "toggleTheme": "Changer de thème",
     "openUserMenu": "Ouvrir le menu utilisateur",
-    "switchLanguage": "Changer de langue"
+    "switchLanguage": "Changer de langue",
+    "signup": "Inscription"
   },
   "Dashboard": {
     "title": "Tableau de bord",
@@ -34,5 +35,24 @@
     "status": "Statut",
     "completed": "Terminé",
     "pending": "En attente"
+  },
+  "SignUpForm": {
+    "title": "Formulaire d'inscription",
+    "subtitle": "Veuillez fournir les informations requises pour continuer",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "resetPassword": "Réinitialiser mon mot de passe",
+    "email": "Adresse e-mail",
+    "phoneNumber": "Numéro de téléphone",
+    "gender": "Sélectionnez le genre",
+    "male": "Homme",
+    "female": "Femme",
+    "other": "Autre",
+    "agree": "J'accepte tout",
+    "saveFile": "Sauvegarder mon fichier",
+    "deleteFile": "Supprimer tous mes fichiers",
+    "website": "Site web",
+    "saveAndContinue": "Enregistrer et continuer",
+    "required": "Obligatoire"
   }
 }
