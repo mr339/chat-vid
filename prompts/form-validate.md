@@ -152,3 +152,50 @@ Follow these steps to create a form with various input types and validation:
 - Remember to import all necessary components from Shadcn UI and adjust the form fields and validation rules according to your specific requirements.
 - Remember to use CheckboxGroup for checkbox with multiple options.
 - For fields marked with a red asterisk (`<span className="text-[#ee4444]">*</span>`), use `.min(1, "Field is required")` .Ensure that the field marked as required shows an appropriate error message if left empty. For other fields, make them optional.
+
+## Additional Validation Guidelines
+
+When defining the Zod schema for form fields, follow these guidelines:
+
+1. **Required Fields:**
+
+   - For all required fields, use `.min(1, "Field is required")` as the first validation rule.
+   - Example: `name: z.string().min(1, "Name is required").min(2, "Name must be at least 2 characters")`
+
+2. **Combining Required and Field-Specific Validation:**
+
+   - After the required validation, add any field-specific validations.
+   - Example for a password field:
+     ```typescript
+     password: z.string()
+       .min(1, "Password is required")
+       .min(8, "Password must be at least 8 characters")
+       .max(100, "Password must not exceed 100 characters");
+     ```
+
+3. **Numeric Fields:**
+
+   - For numeric fields like age, use `z.number()` instead of `z.string()` if possible.
+   - If using a string (e.g., for select inputs), add a refinement to validate the numeric value:
+     ```typescript
+     age: z.string()
+       .min(1, "Age is required")
+       .refine((val) => {
+         const age = parseInt(val, 10);
+         return !isNaN(age) && age >= 16 && age <= 80;
+       }, "Age must be between 16 and 80");
+     ```
+
+4. **Complex Validations:**
+
+   - Use `.refine()` for more complex validations that can't be expressed with built-in Zod methods.
+   - Example for phone number:
+     ```typescript
+     phone: z.string()
+       .optional()
+       .refine((val) => val === "" || /^\+?[1-9]\d{1,14}$/.test(val), {
+         message: "Invalid phone number format",
+       });
+     ```
+
+Remember to apply these guidelines to all form fields to ensure comprehensive and consistent validation throughout your form.
