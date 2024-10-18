@@ -104,25 +104,16 @@ Remember to adjust fields, validation rules, and submission logic as needed for 
 Follow these steps to create a form with various input types and validation:
 
 1. **Define Zod Schema**
-   Create a schema for all required fields:
+   Create a schema for all required fields as per the user's input :
+   [PAUSE HERE] Ask the user to list all required fields and their types.
 
    ```tsx
    const formSchema = z.object({
-     name: z.string().min(2, "Name must be at least 2 characters."),
-     email: z.string().email("Invalid email address."),
-     password: z.string().min(8, "Password must be at least 8 characters."),
-     role: z.enum(["admin", "user", "guest"], {
-       required_error: "Please select a role.",
-     }),
-     interests: z.array(z.string()).nonempty("Select at least one interest."),
-     terms: z.boolean().refine((val) => val, "You must accept the terms."),
-     notifications: z.enum(["all", "important", "none"], {
-       required_error: "Please choose a notification preference.",
-     }),
-     subscribed: z.boolean(),
-     phone: z.string().regex(/^\d{10}$/, "Invalid phone number."),
+     // Add all required fields here
    });
    ```
+
+   Remember not to create a separate file for schema, create it inline in the form page.
 
 2. **Set Up React Hook Form**
    Initialize the form with the schema:
@@ -160,5 +151,4 @@ Follow these steps to create a form with various input types and validation:
 - Make sure to pause at step 2 'Define Required Input Fields [PAUSE HERE] Ask the user to list their required input fields with their types. For example:
 - Remember to import all necessary components from Shadcn UI and adjust the form fields and validation rules according to your specific requirements.
 - Remember to use CheckboxGroup for checkbox with multiple options.
-- Remember to adjust the schema and Controller components based on your specific form fields and requirements. If a field is not required, simply mark it as `.optional()` in the Zod schema.
-- For fields marked with a red asterisk (`<span className="text-[#ee4444]">*</span>`), use `.min(1, "Field is required")` to ensure that the field is marked as required and will show an appropriate error message if left empty. For other fields, make them optional.
+- For fields marked with a red asterisk (`<span className="text-[#ee4444]">*</span>`), use `.min(1, "Field is required")` .Ensure that the field marked as required shows an appropriate error message if left empty. For other fields, make them optional.
