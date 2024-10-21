@@ -16,6 +16,8 @@ import {
   Image,
   Music,
   Code,
+  FormInput,
+  Gamepad,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -125,6 +127,11 @@ export function Header({
                   icon={<Code className="mr-2 h-4 w-4" />}
                   text={t("code")}
                   onClick={() => handleFeatureClick("Code")}
+                />
+                <FeatureItem
+                  icon={<Gamepad className="mr-2 h-4 w-4" />}
+                  text={t("stats")}
+                  onClick={() => handleFeatureClick("Stats")}
                 />
               </div>
             </div>

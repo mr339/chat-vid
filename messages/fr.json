@@ -20,7 +20,8 @@
     "userEmail": "jean@exemple.com",
     "toggleTheme": "Changer de thème",
     "openUserMenu": "Ouvrir le menu utilisateur",
-    "switchLanguage": "Changer de langue"
+    "switchLanguage": "Changer de langue",
+    "stats": "Statistiques"
   },
   "Dashboard": {
     "title": "Tableau de bord",
@@ -34,5 +35,25 @@
     "status": "Statut",
     "completed": "Terminé",
     "pending": "En attente"
+  },
+  "StatsPages": {
+    "title": "Tableau de Bord des Statistiques",
+    "searchPlaceholder": "Rechercher par ID Steam ou Nom d'Utilisateur",
+    "steamId": "ID Steam",
+    "username": "Nom d'Utilisateur",
+    "loading": "Chargement...",
+    "searchResults": "Résultats de la recherche :",
+    "viewStats": "Voir les statistiques",
+    "backToResults": "Retour aux résultats",
+    "errorLoadingProfile": "Erreur lors du chargement du profil",
+    "rank": "Rang",
+    "mmr": "Estimation MMR",
+    "leaderboardRank": "Classement",
+    "notApplicable": "N/A",
+    "unranked": "Non classé",
+    "country": "Pays",
+    "unknown": "Inconnu",
+    "totalGames": "Total des parties",
+    "winRate": "Taux de victoire"
   }
 }

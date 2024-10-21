@@ -7,17 +7,10 @@ import { Upload } from "lucide-react";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ReviewSection from "@/components/ReviewSection";
 
-export default function VideoFeature() {
+const VideoFeature: React.FC = () => {
   const [selectedVideo, setSelectedVideo] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Removed FFmpeg-related code
-  // const ffmpegRef = useRef(new FFmpeg());
-  // useEffect(() => {
-  //   load();
-  // }, []);
-  // const load = async () => { ... };
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -90,4 +83,6 @@ export default function VideoFeature() {
       </div>
     </ProtectedRoute>
   );
-}
+};
+
+export default VideoFeature;

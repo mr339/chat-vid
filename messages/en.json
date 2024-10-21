@@ -20,7 +20,8 @@
     "userEmail": "john@example.com",
     "toggleTheme": "Toggle theme",
     "openUserMenu": "Open user menu",
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "stats": "Stats"
   },
   "Dashboard": {
     "title": "Dashboard",
@@ -34,5 +35,26 @@
     "status": "Status",
     "completed": "Completed",
     "pending": "Pending"
+  },
+  "StatsPages": {
+    "title": "Statistics Dashboard",
+    "searchPlaceholder": "Search by Steam ID or Username",
+    "steamId": "Steam ID",
+    "username": "Username",
+    "loading": "Loading...",
+    "searchResults": "Search Results:",
+    "viewStats": "View Stats",
+    "backToResults": "Back to Results",
+    "rank": "Rank",
+    "mmr": "MMR Estimate",
+    "leaderboardRank": "Leaderboard Rank",
+    "notApplicable": "N/A",
+    "unranked": "Unranked",
+    "accountLevel": "Account Level",
+    "country": "Country",
+    "unknown": "Unknown",
+    "totalGames": "Total Games",
+    "winRate": "Win Rate",
+    "errorLoadingProfile": "Error loading profile"
   }
 }

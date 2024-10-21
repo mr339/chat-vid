@@ -1,0 +1,37 @@
+1. Core Features:
+
+a. Profile Overview:
+ - Display basic details like player’s rank, MMR, account level, and total games played.
+ - Include a profile picture and country info.
+
+b. Match History:
+ - List of recent games with details like win/loss, KDA (Kill/Death/Assist), hero played, and match duration.
+ - Allow filtering by hero, match type (ranked/unranked), or date.
+
+c. Hero Performance:        
+ - Detailed stats for each hero the player has played: win rates, average KDA, average GPM (Gold Per Minute), XPM (Experience Per Minute).
+ - Display most-played heroes.
+
+d. Achievements and Badges:
+ - Show in-game badges or milestones like "First Blood," "Rampage," or "Most Kills" in a single game.
+
+e. Visualization:
+ - Graphs or charts for MMR progression, win/loss streaks, hero win rates, and playtime breakdown.
+ - Use libraries like Chart.js or D3.js for interactive graphs.
+
+2.Advanced Features (Optional):
+a. Match Analysis:
+ - Provide deeper insights into individual matches, including heat maps of hero movement or team fight analysis.
+
+b. Comparison Tool:
+ - Compare two players stats side-by-side.
+
+Compare two players stats side-by-side.
+ - This could be useful for users who want to compare themselves with friends or pro players.
+
+c. Global Leaderboards:
+ - Pull leaderboard data to show top Dota 2 players.
+ - Let users track the performance of high-level players.
+ 
+d. Live Match Tracking:
+ - Display live match information if available, including ongoing pro games or user-specific live matches.

@@ -20,11 +20,12 @@
     "userEmail": "john@example.com",
     "toggleTheme": "थिम परिवर्तन गर्नुहोस्",
     "openUserMenu": "प्रयोगकर्ता मेनु खोल्नुहोस्",
-    "switchLanguage": "भाषा परिवर्तन गर्नुहोस्"
+    "switchLanguage": "भाषा परिवर्तन गर्नुहोस्",
+    "stats": "तथ्याङ्क"
   },
   "Dashboard": {
     "title": "ड्यासबोर्ड",
-    "monthlySales": "मासिक बिक्री",
+    "monthlySales": "मासिक िक्री",
     "productSalesDistribution": "उत्पादन बिक्री वितरण",
     "revenueComparison": "राजस्व तुलना",
     "recentTransactions": "हालैका कारोबारहरू",
@@ -34,5 +35,25 @@
     "status": "स्थिति",
     "completed": "पूरा भयो",
     "pending": "प्रक्रियामा"
+  },
+  "StatsPages": {
+    "title": "तथ्याङ्क ड्यासबोर्ड",
+    "searchPlaceholder": "स्टीम आईडी वा प्रयोगकर्ता नाम द्वारा खोज्नुहोस्",
+    "steamId": "स्टीम आईडी",
+    "username": "प्रयोगकर्ता नाम",
+    "loading": "लोड हुँदैछ...",
+    "searchResults": "खोज परिणामहरू:",
+    "viewStats": "तथ्याङ्क हेर्नुहोस्",
+    "backToResults": "परिणामहरूमा फर्कनुहोस्",
+    "errorLoadingProfile": "प्रोफाइल लोड गर्दा त्रुटि",
+    "rank": "रैंक",
+    "mmr": "MMR अनुमान",
+    "leaderboardRank": "लिडरबोर्ड रैंक",
+    "notApplicable": "लागू नहुने",
+    "unranked": "अनरैंक्ड",
+    "country": "देश",
+    "unknown": "अज्ञात",
+    "totalGames": "कुल खेलहरू",
+    "winRate": "जित दर"
   }
 }
