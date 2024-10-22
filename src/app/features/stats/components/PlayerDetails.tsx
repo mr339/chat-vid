@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Player } from "@/app/features/stats/types";
-import { getPlayerProfile, getPlayerWinLoss } from "@/services/opendotaApi";
+import {
+  getPlayerProfile,
+  getPlayerWinLoss,
+  fetchRecentMatches,
+} from "@/services/opendotaApi";
 import ProfileOverview from "./ProfileOverview";
 import { Loader2 } from "lucide-react";
 
@@ -15,18 +19,25 @@ const PlayerDetails: React.FC<PlayerDetailsProps> = ({ player, onBack }) => {
   const t = useTranslations("StatsPages");
   const [profile, setProfile] = useState<any>(null);
   const [winLoss, setWinLoss] = useState<any>(null);
+  const [lastMatch, setLastMatch] = useState<any>(null);
+  const [recentMatches, setRecentMatches] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchPlayerDetails = async () => {
       setIsLoading(true);
       try {
-        const [profileData, winLossData] = await Promise.all([
-          getPlayerProfile(player.account_id.toString()),
-          getPlayerWinLoss(player.account_id.toString()),
-        ]);
+        const [profileData, winLossData, recentMatchesData] = await Promise.all(
+          [
+            getPlayerProfile(player.account_id.toString()),
+            getPlayerWinLoss(player.account_id.toString()),
+            fetchRecentMatches(player.account_id),
+          ]
+        );
         setProfile(profileData);
         setWinLoss(winLossData);
+        setRecentMatches(recentMatchesData);
+        setLastMatch(recentMatchesData[0] || null);
       } catch (error) {
         console.error("Error fetching player details:", error);
       } finally {
@@ -48,7 +59,12 @@ const PlayerDetails: React.FC<PlayerDetailsProps> = ({ player, onBack }) => {
           <p className="mt-2 text-foreground">{t("loading")}</p>
         </div>
       ) : profile && winLoss ? (
-        <ProfileOverview profile={profile} winLoss={winLoss} />
+        <ProfileOverview
+          profile={profile}
+          winLoss={winLoss}
+          lastMatch={lastMatch}
+          recentMatches={recentMatches}
+        />
       ) : (
         <p className="text-foreground">{t("errorLoadingProfile")}</p>
       )}

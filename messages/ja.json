@@ -54,6 +54,20 @@
     "country": "国",
     "unknown": "不明",
     "totalGames": "総ゲーム数",
-    "winRate": "勝率"
+    "winRate": "勝率",
+    "lastMatch": "最終試合",
+    "moreDetails": "詳細を見る",
+    "recentMatches": "最近の試合",
+    "result": "結果",
+    "hero": "ヒーロー",
+    "kda": "K/D/A",
+    "duration": "持続時間",
+    "win": "勝利",
+    "loss": "敗北",
+    "type": "タイプ",
+    "wonMatch": "勝利した試合",
+    "lostMatch": "敗北した試合",
+    "allPick": "全ピック",
+    "hideDetails": "Hide Details"
   }
 }

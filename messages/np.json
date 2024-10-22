@@ -54,6 +54,20 @@
     "country": "देश",
     "unknown": "अज्ञात",
     "totalGames": "कुल खेलहरू",
-    "winRate": "जित दर"
+    "winRate": "जित दर",
+    "lastMatch": "अन्तिम खेल",
+    "moreDetails": "थप विवरण",
+    "recentMatches": "हालिया खेलहरू",
+    "result": "परिणाम",
+    "hero": "हीरो",
+    "kda": "K/D/A",
+    "duration": "कालावधि",
+    "win": "जित",
+    "loss": "हराय्यो",
+    "type": "Type",
+    "wonMatch": "जित खेल",
+    "lostMatch": "हराय्यो खेल",
+    "allPick": "सबै चुन्नुहोस्",
+    "hideDetails": "विवरण छुपाउनुहोस्"
   }
 }

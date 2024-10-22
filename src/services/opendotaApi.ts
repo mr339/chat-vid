@@ -27,16 +27,6 @@ export async function getPlayerWinLoss(accountId: string) {
   return response.json();
 }
 
-export async function getPlayerRecentMatches(accountId: string) {
-  const response = await fetch(
-    `${BASE_URL}/players/${accountId}/recentMatches`
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch recent matches");
-  }
-  return response.json();
-}
-
 export async function getPlayerHeroStats(accountId: string) {
   const response = await fetch(`${BASE_URL}/players/${accountId}/heroes`);
   if (!response.ok) {
@@ -44,3 +34,14 @@ export async function getPlayerHeroStats(accountId: string) {
   }
   return response.json();
 }
+
+// Add this new function to fetch recent matches
+export const fetchRecentMatches = async (accountId: number) => {
+  const response = await fetch(
+    `${BASE_URL}/players/${accountId}/recentMatches`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch recent matches");
+  }
+  return response.json();
+};

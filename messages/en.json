@@ -55,6 +55,20 @@
     "unknown": "Unknown",
     "totalGames": "Total Games",
     "winRate": "Win Rate",
-    "errorLoadingProfile": "Error loading profile"
+    "errorLoadingProfile": "Error loading profile",
+    "lastMatch": "Last Match",
+    "moreDetails": "More Details",
+    "recentMatches": "Recent Matches",
+    "result": "Result",
+    "hero": "Hero",
+    "kda": "K/D/A",
+    "duration": "Duration",
+    "win": "Win",
+    "loss": "Loss",
+    "type": "Type",
+    "wonMatch": "Won Match",
+    "lostMatch": "Lost Match",
+    "allPick": "All Pick",
+    "hideDetails": "Hide Details"
   }
 }

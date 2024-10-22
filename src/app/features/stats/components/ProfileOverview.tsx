@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
+import { getRankImage, getRankName } from "@/utils/rankUtils";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { formatLastMatchTime } from "@/utils/dateUtils";
+import RecentMatches from "./RecentMatches";
 
 interface ProfileOverviewProps {
   profile: {
@@ -28,36 +33,37 @@ interface ProfileOverviewProps {
     win: number;
     lose: number;
   };
+  lastMatch: {
+    match_id: number;
+    start_time: number;
+    hero_id: number;
+    player_slot: number;
+  } | null;
+  recentMatches: any[]; // Add this prop
 }
 
 const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   profile,
   winLoss,
+  lastMatch,
+  recentMatches, // Add this prop
 }) => {
   const t = useTranslations("StatsPages");
+  const [showRecentMatches, setShowRecentMatches] = useState(false);
+
   const totalGames = winLoss.win + winLoss.lose;
   const winRate =
     totalGames > 0 ? ((winLoss.win / totalGames) * 100).toFixed(2) : "0.00";
 
-  const getRankTier = (rank_tier: number | null) => {
-    if (rank_tier === null) return t("unranked");
-    const tier = Math.floor(rank_tier / 10);
-    const stars = rank_tier % 10;
-    const tierNames = [
-      "Herald",
-      "Guardian",
-      "Crusader",
-      "Archon",
-      "Legend",
-      "Ancient",
-      "Divine",
-      "Immortal",
-    ];
-    return `${tierNames[tier - 1]} ${stars}`;
+  const rankImageSrc = getRankImage(profile.rank_tier);
+  const rankName = getRankName(profile.rank_tier);
+
+  const toggleRecentMatches = () => {
+    setShowRecentMatches(!showRecentMatches);
   };
 
   return (
-    <div className="bg-background p-6 rounded-lg shadow-md">
+    <div className="bg-background p-6 rounded-lg shadow-md relative">
       <div className="flex items-center mb-4">
         <img
           src={profile.profile.avatarfull}
@@ -78,9 +84,16 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           <p className="text-foreground">
             {t("steamId")}: {profile.profile.steamid}
           </p>
-          <p className="text-foreground">
-            {t("rank")}: {getRankTier(profile.rank_tier)}
-          </p>
+          <div className="flex items-center mt-2">
+            <Image
+              src={rankImageSrc}
+              alt={rankName}
+              width={40}
+              height={40}
+              className="mr-2"
+            />
+            <span className="text-foreground">{rankName}</span>
+          </div>
         </div>
         <div>
           <p className="text-foreground">
@@ -99,6 +112,22 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         <p className="text-foreground">
           {t("winRate")}: {winRate}%
         </p>
+        {lastMatch && (
+          <p className="text-foreground">
+            {t("lastMatch")}: {formatLastMatchTime(lastMatch.start_time)}
+          </p>
+        )}
+      </div>
+
+      <Button
+        className="absolute bottom-4 right-4"
+        variant="default"
+        onClick={toggleRecentMatches}
+      >
+        {showRecentMatches ? t("hideDetails") : t("moreDetails")}
+      </Button>
+      <div className="mt-6 mb-16">
+        {showRecentMatches && <RecentMatches matches={recentMatches} />}
       </div>
     </div>
   );

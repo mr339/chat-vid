@@ -54,6 +54,20 @@
     "country": "Pays",
     "unknown": "Inconnu",
     "totalGames": "Total des parties",
-    "winRate": "Taux de victoire"
+    "winRate": "Taux de victoire",
+    "lastMatch": "Dernière partie",
+    "moreDetails": "Plus de détails",
+    "recentMatches": "Parties récentes",
+    "result": "Résultat",
+    "hero": "Héro",
+    "kda": "K/D/A",
+    "duration": "Durée",
+    "win": "Gagné",
+    "loss": "Perdu",
+    "type": "taper",
+    "wonMatch": "Match Gagné",
+    "lostMatch": "Match Perdu",
+    "allPick": "Tout Picked",
+    "hideDetails": "Masquer les détails"
   }
 }
