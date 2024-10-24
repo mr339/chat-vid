@@ -120,13 +120,14 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       </div>
 
       <Button
-        className="absolute bottom-4 right-4"
+        className="relative bottom-4 right-4"
         variant="default"
         onClick={toggleRecentMatches}
       >
         {showRecentMatches ? t("hideDetails") : t("moreDetails")}
       </Button>
-      <div className="mt-6 mb-16">
+
+      <div className="mt-2 mb-2">
         {showRecentMatches && <RecentMatches matches={recentMatches} />}
       </div>
     </div>
