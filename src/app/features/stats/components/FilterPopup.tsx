@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useTranslations } from "next-intl";
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -7,7 +6,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { useFilterPopup } from "@/hooks/useFilterPopup.hook";
 
 interface FilterPopupProps {
   isOpen: boolean;
@@ -15,36 +15,38 @@ interface FilterPopupProps {
 }
 
 const FilterPopup: React.FC<FilterPopupProps> = ({ isOpen, onClose }) => {
-  const t = useTranslations("StatsPages");
-  const [selectedLength, setSelectedLength] = useState<string | null>(null);
-  const [selectedHero, setSelectedHero] = useState<string | null>(null);
-
-  const gameLengthOptions = [
-    { value: "under20", label: "Under 20 minutes" },
-    { value: "20to40", label: "20 - 40 minutes" },
-    { value: "40to60", label: "40 - 60 minutes" },
-    { value: "over60", label: "Over 60 minutes" },
-  ];
-
-  const heroOptions = [
-    { value: "antimage", label: "Anti-Mage" },
-    { value: "axe", label: "Axe" },
-    { value: "necro", label: "Necrophos" },
-    { value: "undying", label: "Undying" },
-  ];
+  const {
+    selectedLength,
+    setSelectedLength,
+    selectedHero,
+    setSelectedHero,
+    selectedDeath,
+    setSelectedDeath,
+    selectedKills,
+    setSelectedKills,
+    selectedAssists,
+    setSelectedAssists,
+    heroSearch,
+    setHeroSearch,
+    filteredHeroes,
+    gameLengthOptions,
+    statOptions,
+  } = useFilterPopup();
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[625px] bg-background text-foreground">
+      <DialogContent className="sm:max-w-[800px] bg-background text-foreground">
         <DialogHeader className="flex flex-row justify-between items-center">
           <DialogTitle className="text-xl font-bold">
-            {t("searchFilters")}
+            Search filters
           </DialogTitle>
         </DialogHeader>
-        <div className="py-4 flex space-x-8">
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-2">{t("gameLength")}</h3>
-            <div className="space-y-2">
+        <div className="py-2 flex flex-wrap gap-4">
+          {/* Game Length Filter */}
+          <div className="flex-1 min-w-[120px]">
+            <h3 className="text-base font-semibold mb-2">GAME LENGTH</h3>
+            <div className="w-full h-0.5 bg-gray-400 dark:bg-gray-600 mb-2"></div>
+            <div className="space-y-2 pl-1">
               {gameLengthOptions.map((option) => (
                 <div
                   key={option.value}
@@ -52,7 +54,7 @@ const FilterPopup: React.FC<FilterPopupProps> = ({ isOpen, onClose }) => {
                   onClick={() => setSelectedLength(option.value)}
                 >
                   <span
-                    className={`py-2 px-4 cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors rounded block ${
+                    className={`py-1.5 px-3 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors rounded block ${
                       selectedLength === option.value ? "text-primary" : ""
                     }`}
                   >
@@ -62,29 +64,74 @@ const FilterPopup: React.FC<FilterPopupProps> = ({ isOpen, onClose }) => {
               ))}
             </div>
           </div>
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-2">{t("hero")}</h3>
-            <div className="space-y-2">
-              {heroOptions.map((option) => (
+
+          {/* Hero Filter */}
+          <div className="flex-1 min-w-[200px]">
+            <h3 className="text-base font-semibold mb-2">HERO</h3>
+            <div className="w-full h-0.5 bg-gray-400 dark:bg-gray-600 mb-2"></div>
+            <Input
+              type="text"
+              placeholder="Search heroes..."
+              value={heroSearch}
+              onChange={(e) => setHeroSearch(e.target.value)}
+              className="mb-2"
+            />
+            <div className="space-y-2 pl-1 max-h-40 overflow-y-auto">
+              {filteredHeroes.map((hero) => (
                 <div
-                  key={option.value}
+                  key={hero.id}
                   className="block"
-                  onClick={() => setSelectedHero(option.value)}
+                  onClick={() => setSelectedHero(hero.id)}
                 >
                   <span
-                    className={`py-2 px-4 cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors rounded block ${
-                      selectedHero === option.value ? "text-primary" : ""
+                    className={`py-1.5 px-3 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors rounded block ${
+                      selectedHero === hero.id ? "text-primary" : ""
                     }`}
                   >
-                    {option.label}
+                    {hero.localized_name}
                   </span>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* Death, Kills, and Assists Filters */}
+          {["DEATH", "KILLS", "ASSISTS"].map((stat) => (
+            <div key={stat} className="flex-1 min-w-[120px]">
+              <h3 className="text-base font-semibold mb-2">{stat}</h3>
+              <div className="w-full h-0.5 bg-gray-400 dark:bg-gray-600 mb-2"></div>
+              <div className="space-y-2 pl-1">
+                {statOptions.map((option) => (
+                  <div
+                    key={option.value}
+                    className="block"
+                    onClick={() => {
+                      if (stat === "DEATH") setSelectedDeath(option.value);
+                      if (stat === "KILLS") setSelectedKills(option.value);
+                      if (stat === "ASSISTS") setSelectedAssists(option.value);
+                    }}
+                  >
+                    <span
+                      className={`py-1.5 px-3 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors rounded block ${
+                        (stat === "DEATH" && selectedDeath === option.value) ||
+                        (stat === "KILLS" && selectedKills === option.value) ||
+                        (stat === "ASSISTS" && selectedAssists === option.value)
+                          ? "text-primary"
+                          : ""
+                      }`}
+                    >
+                      {option.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="flex justify-end space-x-2 mt-4">
-          <Button onClick={onClose}>{t("apply")}</Button>
+        <div className="flex justify-end space-x-2 mt-2">
+          <Button onClick={onClose} size="sm" className="text-sm">
+            Apply
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
