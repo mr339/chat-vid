@@ -20,7 +20,8 @@
     "userEmail": "john@example.com",
     "toggleTheme": "थिम परिवर्तन गर्नुहोस्",
     "openUserMenu": "प्रयोगकर्ता मेनु खोल्नुहोस्",
-    "switchLanguage": "भाषा परिवर्तन गर्नुहोस्"
+    "switchLanguage": "भाषा परिवर्तन गर्नुहोस्",
+    "form": "फॉर्म"
   },
   "Dashboard": {
     "title": "ड्यासबोर्ड",

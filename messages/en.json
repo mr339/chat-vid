@@ -20,7 +20,8 @@
     "userEmail": "john@example.com",
     "toggleTheme": "Toggle theme",
     "openUserMenu": "Open user menu",
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "form": "Form"
   },
   "Dashboard": {
     "title": "Dashboard",

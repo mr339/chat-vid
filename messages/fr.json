@@ -20,7 +20,8 @@
     "userEmail": "jean@exemple.com",
     "toggleTheme": "Changer de thème",
     "openUserMenu": "Ouvrir le menu utilisateur",
-    "switchLanguage": "Changer de langue"
+    "switchLanguage": "Changer de langue",
+    "form": "Formulaire"
   },
   "Dashboard": {
     "title": "Tableau de bord",

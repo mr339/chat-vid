@@ -69,8 +69,15 @@ export function Header({
   }, [featuresRef]);
 
   const handleFeatureClick = (feature: string) => {
-    setShowFeatures(false);
-    router.push(`/features/${feature.toLowerCase()}`);
+    switch (feature) {
+      case "Video":
+        router.push("/features/video");
+        break;
+      case "Form":
+        router.push("/features/form");
+        break;
+      // ... other cases
+    }
   };
 
   return (
@@ -100,6 +107,11 @@ export function Header({
                   icon={<Video className="mr-2 h-4 w-4" />}
                   text={t("video")}
                   onClick={() => handleFeatureClick("Video")}
+                />
+                <FeatureItem
+                  icon={<FileText className="mr-2 h-4 w-4" />}
+                  text={t("form")}
+                  onClick={() => handleFeatureClick("Form")}
                 />
                 <FeatureItem
                   icon={<Mic className="mr-2 h-4 w-4" />}
