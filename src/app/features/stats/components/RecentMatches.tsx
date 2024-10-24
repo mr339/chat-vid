@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslations } from "next-intl";
-import { RecentMatch } from "@/app/features/stats/types";
-import { formatDuration, formatTimeAgo } from "@/utils/dateUtils";
+import { RecentMatch } from "@app/features/stats/types";
+import { formatDuration, formatTimeAgo } from "@utils/dateUtils";
 import {
   Table,
   TableBody,
@@ -9,10 +9,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@components/ui/table";
 import Image from "next/image";
-import { getHeroName, getHeroImage } from "@/utils/heroUtils";
-import { getGameModeName } from "@/utils/gameModeUtils";
+import { getHeroName, getHeroImage } from "@utils/heroUtils";
+import { getGameModeName } from "@utils/gameModeUtils";
 
 interface RecentMatchesProps {
   matches: RecentMatch[];

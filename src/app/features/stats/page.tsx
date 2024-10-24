@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
-import { searchPlayers } from "@/services/opendotaApi";
 import SearchSection from "./components/SearchSection";
 import ResultsSection from "./components/ResultsSection";
 import { Player } from "./types";
+import { searchPlayers } from "@/services/opendotaApi";
 
 const StatsPage: React.FC = () => {
   const t = useTranslations("StatsPages");

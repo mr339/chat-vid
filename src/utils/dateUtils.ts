@@ -1,5 +1,3 @@
-import { useTranslations } from "next-intl";
-
 export const formatLastMatchTime = (lastMatchTime: number | null) => {
   if (!lastMatchTime) return "unknown";
   const date = new Date(lastMatchTime * 1000);

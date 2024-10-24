@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { getRankImage, getRankName } from "@/utils/rankUtils";
+import { getRankImage, getRankName } from "../../../../utils/rankUtils";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { formatLastMatchTime } from "@/utils/dateUtils";
+import { Button } from "../../../../components/ui/button";
+import { formatLastMatchTime } from "../../../../utils/dateUtils";
 import RecentMatches from "./RecentMatches";
 
 interface ProfileOverviewProps {
@@ -63,7 +63,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   };
 
   return (
-    <div className="bg-background p-6 rounded-lg shadow-md relative">
+    <div className="bg-background p-6 rounded-lg shadow-md dark:shadow-[0_4px_6px_-1px_rgba(255,255,255,0.2),0_2px_4px_-2px_rgba(255,255,255,0.2)] relative">
       <div className="flex items-center mb-4">
         <img
           src={profile.profile.avatarfull}
@@ -119,13 +119,15 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         )}
       </div>
 
-      <Button
-        className="relative bottom-4 right-4"
-        variant="default"
-        onClick={toggleRecentMatches}
-      >
-        {showRecentMatches ? t("hideDetails") : t("moreDetails")}
-      </Button>
+      <div className="flex justify-end mt-4">
+        <Button
+          className="relative"
+          variant="default"
+          onClick={toggleRecentMatches}
+        >
+          {showRecentMatches ? t("hideDetails") : t("moreDetails")}
+        </Button>
+      </div>
 
       <div className="mt-2 mb-2">
         {showRecentMatches && <RecentMatches matches={recentMatches} />}
