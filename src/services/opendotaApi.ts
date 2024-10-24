@@ -1,4 +1,6 @@
-const BASE_URL = process.env.NEXT_PUBLIC_OPENDOTA_API_URL;
+import { Hero, RecentMatch } from "@/types/opendota";
+
+const BASE_URL = process.env.NEXT_PUBLIC_OPENDOTA_API_URL?.replace(/\/$/, "");
 console.log("BASE_URL", BASE_URL);
 
 export async function searchPlayers(query: string) {
@@ -36,7 +38,9 @@ export async function getPlayerHeroStats(accountId: string) {
 }
 
 // Add this new function to fetch recent matches
-export const fetchRecentMatches = async (accountId: number) => {
+export const fetchRecentMatches = async (
+  accountId: number
+): Promise<RecentMatch[]> => {
   const response = await fetch(
     `${BASE_URL}/players/${accountId}/recentMatches`
   );
@@ -44,4 +48,14 @@ export const fetchRecentMatches = async (accountId: number) => {
     throw new Error("Failed to fetch recent matches");
   }
   return response.json();
+};
+
+export const getHeroes = async (): Promise<Hero[]> => {
+  const response = await fetch(`${BASE_URL}/heroes`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch heroes");
+  }
+  const data = await response.json();
+  console.log("Hero data:", data[0]); // Log the first hero to see its structure
+  return data;
 };

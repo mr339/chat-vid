@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { Player } from "@/app/features/stats/types";
-import {
-  getPlayerProfile,
-  getPlayerWinLoss,
-  fetchRecentMatches,
-} from "@/services/opendotaApi";
+import { Player } from "@/types/opendota";
 import ProfileOverview from "./ProfileOverview";
 import { Loader2 } from "lucide-react";
+import { usePlayerDetails } from "@/hooks/usePlayerDetails.hook";
 
 interface PlayerDetailsProps {
   player: Player;
@@ -17,36 +13,8 @@ interface PlayerDetailsProps {
 
 const PlayerDetails: React.FC<PlayerDetailsProps> = ({ player, onBack }) => {
   const t = useTranslations("StatsPages");
-  const [profile, setProfile] = useState<any>(null);
-  const [winLoss, setWinLoss] = useState<any>(null);
-  const [lastMatch, setLastMatch] = useState<any>(null);
-  const [recentMatches, setRecentMatches] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPlayerDetails = async () => {
-      setIsLoading(true);
-      try {
-        const [profileData, winLossData, recentMatchesData] = await Promise.all(
-          [
-            getPlayerProfile(player.account_id.toString()),
-            getPlayerWinLoss(player.account_id.toString()),
-            fetchRecentMatches(player.account_id),
-          ]
-        );
-        setProfile(profileData);
-        setWinLoss(winLossData);
-        setRecentMatches(recentMatchesData);
-        setLastMatch(recentMatchesData[0] || null);
-      } catch (error) {
-        console.error("Error fetching player details:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPlayerDetails();
-  }, [player.account_id]);
+  const { profile, winLoss, lastMatch, recentMatches, isLoading } =
+    usePlayerDetails({ player });
 
   return (
     <div>

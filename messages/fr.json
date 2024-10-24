@@ -68,6 +68,21 @@
     "wonMatch": "Match Gagné",
     "lostMatch": "Match Perdu",
     "allPick": "Tout Picked",
-    "hideDetails": "Masquer les détails"
+    "hideDetails": "Masquer les détails",
+    "ranked": "Ranké",
+    "team": "Equipe",
+    "radiant": "Radiant",
+    "dire": "Dire",
+    "wins": "Wins",
+    "losses": "Losses",
+    "noMatchesFound": "Aucune partie trouvée",
+    "tryDifferentFilters": "Essayez différents filtres ou effacez tous les filtres pour voir plus de résultats",
+    "filters": "Filtres",
+    "searchFilters": "Rechercher des filtres",
+    "gameLength": "Durée de la partie",
+    "kills": "Kills",
+    "deaths": "Morts",
+    "assists": "Assists",
+    "apply": "Appliquer"
   }
 }

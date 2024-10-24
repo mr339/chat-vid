@@ -69,6 +69,21 @@
     "wonMatch": "Won Match",
     "lostMatch": "Lost Match",
     "allPick": "All Pick",
-    "hideDetails": "Hide Details"
+    "hideDetails": "Hide Details",
+    "ranked": "Ranked",
+    "team": "Team",
+    "radiant": "Radiant",
+    "dire": "Dire",
+    "wins": "Wins",
+    "losses": "Losses",
+    "noMatchesFound": "No matches found",
+    "tryDifferentFilters": "Try different filters or clear all filters to see more results",
+    "searchFilters": "Search Filters",
+    "gameLength": "Game Length",
+    "kills": "Kills",
+    "deaths": "Deaths",
+    "assists": "Assists",
+    "apply": "Apply",
+    "filters": "Filters"
   }
 }

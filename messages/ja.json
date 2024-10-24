@@ -68,6 +68,21 @@
     "wonMatch": "勝利した試合",
     "lostMatch": "敗北した試合",
     "allPick": "全ピック",
-    "hideDetails": "Hide Details"
+    "hideDetails": "Hide Details",
+    "ranked": "ランク付き",
+    "team": "チーム",
+    "radiant": "レディアント",
+    "dire": "ディア",
+    "wins": "勝利",
+    "losses": "敗北",
+    "noMatchesFound": "試合が見つかりません",
+    "tryDifferentFilters": "異なるフィルターを試してください、またはすべてのフィルターをクリアして、より多くの結果を見る",
+    "filters": "フィルター",
+    "searchFilters": "フィルター検索",
+    "gameLength": "ゲーム長",
+    "kills": "Kill",
+    "deaths": "Deaths",
+    "assists": "Assists",
+    "apply": "適用"
   }
 }

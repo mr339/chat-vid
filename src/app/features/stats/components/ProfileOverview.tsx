@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
-import { getRankImage, getRankName } from "../../../../utils/rankUtils";
+import { getRankImage, getRankName } from "@/utils/rankUtils";
 import Image from "next/image";
-import { Button } from "../../../../components/ui/button";
-import { formatLastMatchTime } from "../../../../utils/dateUtils";
+import { Button } from "@/components/ui/button";
+import { formatLastMatchTime } from "@/utils/dateUtils";
 import RecentMatches from "./RecentMatches";
+import { RecentMatch, Hero } from "@/types/opendota";
+import { useProfileOverview } from "@/hooks/useProfileOverview.hook";
 
 interface ProfileOverviewProps {
   profile: {
@@ -39,28 +41,31 @@ interface ProfileOverviewProps {
     hero_id: number;
     player_slot: number;
   } | null;
-  recentMatches: any[]; // Add this prop
+  recentMatches: RecentMatch[];
 }
 
 const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   profile,
   winLoss,
   lastMatch,
-  recentMatches, // Add this prop
+  recentMatches,
 }) => {
   const t = useTranslations("StatsPages");
-  const [showRecentMatches, setShowRecentMatches] = useState(false);
-
-  const totalGames = winLoss.win + winLoss.lose;
-  const winRate =
-    totalGames > 0 ? ((winLoss.win / totalGames) * 100).toFixed(2) : "0.00";
+  const {
+    showRecentMatches,
+    heroes,
+    totalGames,
+    winRate,
+    toggleRecentMatches,
+  } = useProfileOverview({
+    profile,
+    winLoss,
+    lastMatch,
+    recentMatches,
+  });
 
   const rankImageSrc = getRankImage(profile.rank_tier);
   const rankName = getRankName(profile.rank_tier);
-
-  const toggleRecentMatches = () => {
-    setShowRecentMatches(!showRecentMatches);
-  };
 
   return (
     <div className="bg-background p-6 rounded-lg shadow-md dark:shadow-[0_4px_6px_-1px_rgba(255,255,255,0.2),0_2px_4px_-2px_rgba(255,255,255,0.2)] relative">
@@ -130,7 +135,9 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       </div>
 
       <div className="mt-2 mb-2">
-        {showRecentMatches && <RecentMatches matches={recentMatches} />}
+        {showRecentMatches && (
+          <RecentMatches matches={recentMatches} heroes={heroes} />
+        )}
       </div>
     </div>
   );

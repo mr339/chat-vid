@@ -68,6 +68,21 @@
     "wonMatch": "जित खेल",
     "lostMatch": "हराय्यो खेल",
     "allPick": "सबै चुन्नुहोस्",
-    "hideDetails": "विवरण छुपाउनुहोस्"
+    "hideDetails": "विवरण छुपाउनुहोस्",
+    "ranked": "रैंक्ड",
+    "team": "टीम",
+    "radiant": "रेडियंट",
+    "dire": "डियर",
+    "wins": "जित",
+    "losses": "हराय्यो",
+    "noMatchesFound": "कुनै खेल फेला पर्दैन",
+    "tryDifferentFilters": "भिन्न फिल्टरहरू प्रयास गर्नुहोस् वा सबै फिल्टरहरू साफ गर्नुहोस् वा थप परिणामहरू हेर्नुहोस्",
+    "filters": "फिल्टर",
+    "searchFilters": "फिल्टर खोज्नुहोस्",
+    "gameLength": "खेल कालावधि",
+    "kills": "Kill",
+    "deaths": "Deaths",
+    "assists": "Assists",
+    "apply": "अप्लाई"
   }
 }

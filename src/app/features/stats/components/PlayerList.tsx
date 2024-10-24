@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { Player } from "@/app/features/stats/types";
+import { Player } from "@/types/opendota";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Pagination,
@@ -11,22 +11,17 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { usePlayerList } from "@/hooks/usePlayerList.hook";
 
 interface PlayerListProps {
   players: Player[];
   onSelectPlayer: (player: Player) => void;
 }
 
-const ITEMS_PER_PAGE = 6;
-
 const PlayerList: React.FC<PlayerListProps> = ({ players, onSelectPlayer }) => {
   const t = useTranslations("StatsPages");
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const totalPages = Math.ceil(players.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentPlayers = players.slice(startIndex, endIndex);
+  const { currentPage, setCurrentPage, totalPages, currentPlayers } =
+    usePlayerList({ players });
 
   return (
     <div>
