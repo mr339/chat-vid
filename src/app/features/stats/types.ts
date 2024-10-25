@@ -1,8 +1,7 @@
-export interface Player {
-  account_id: number;
-  personaname: string;
-  avatarfull: string;
-  lastMatchTime?: number | null;
+import { Player as OpenDotaPlayer } from "@/types/opendota";
+
+export interface Player extends OpenDotaPlayer {
+  // Add any additional properties specific to your stats feature here
 }
 
 export interface RecentMatch {

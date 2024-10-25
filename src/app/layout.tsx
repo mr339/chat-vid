@@ -66,7 +66,7 @@ export default function RootLayout({
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
-    const storedLocale = localStorage.getItem("locale") || "en";
+    const storedLocale = localStorage.getItem("locale") || "jp";
     setLocale(storedLocale);
     getMessages(storedLocale).then(setMessages);
   }, []);

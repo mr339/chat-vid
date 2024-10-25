@@ -51,7 +51,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({
               {t("steamId")}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setSearchType("username")}>
-              {t("username")}
+              {t("statUsername")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

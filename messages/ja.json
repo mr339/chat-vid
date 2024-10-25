@@ -14,13 +14,8 @@
     "image": "画像",
     "music": "音楽",
     "code": "コード",
-    "greeting": "こんにちは、{name}さん",
-    "email": "{email}",
     "userName": "山田太郎",
     "userEmail": "taro@example.com",
-    "toggleTheme": "テーマ切り替え",
-    "openUserMenu": "ユーザーメニューを開く",
-    "switchLanguage": "言語を切り替える",
     "stats": "統計"
   },
   "Dashboard": {
@@ -40,7 +35,7 @@
     "title": "統計ダッシュボード",
     "searchPlaceholder": "Steam ID またはユーザー名で検索",
     "steamId": "Steam ID",
-    "username": "ユーザー名",
+    "statUsername": "ユーザー名",
     "loading": "読み込み中...",
     "searchResults": "検索結果：",
     "viewStats": "統計を見る",
@@ -83,6 +78,7 @@
     "kills": "Kill",
     "deaths": "Deaths",
     "assists": "Assists",
-    "apply": "適用"
+    "apply": "適用",
+    "noPlayersFound": "プレイヤーが見つかりません"
   }
 }

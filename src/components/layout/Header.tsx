@@ -150,7 +150,6 @@ export function Header({
             ) : (
               <Moon className="h-5 w-5" />
             )}
-            <span className="sr-only">{t("toggleTheme")}</span>
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -160,7 +159,6 @@ export function Header({
                 className="text-foreground hover:bg-accent hover:text-accent-foreground"
               >
                 <User className="h-5 w-5" />
-                <span className="sr-only">{t("openUserMenu")}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end">
@@ -207,8 +205,6 @@ export function Header({
                   : locale === "fr"
                   ? "FR"
                   : "JA"}
-
-                <span className="sr-only">{t("switchLanguage")}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent

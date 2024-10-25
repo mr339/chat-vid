@@ -14,13 +14,8 @@
     "image": "Image",
     "music": "Musique",
     "code": "Code",
-    "greeting": "Bonjour, {name}",
-    "email": "{email}",
     "userName": "Jean Dupont",
     "userEmail": "jean@exemple.com",
-    "toggleTheme": "Changer de thème",
-    "openUserMenu": "Ouvrir le menu utilisateur",
-    "switchLanguage": "Changer de langue",
     "stats": "Statistiques"
   },
   "Dashboard": {
@@ -40,7 +35,7 @@
     "title": "Tableau de Bord des Statistiques",
     "searchPlaceholder": "Rechercher par ID Steam ou Nom d'Utilisateur",
     "steamId": "ID Steam",
-    "username": "Nom d'Utilisateur",
+    "statUsername": "Nom d'Utilisateur",
     "loading": "Chargement...",
     "searchResults": "Résultats de la recherche :",
     "viewStats": "Voir les statistiques",
@@ -83,6 +78,7 @@
     "kills": "Kills",
     "deaths": "Morts",
     "assists": "Assists",
-    "apply": "Appliquer"
+    "apply": "Appliquer",
+    "noPlayersFound": "Aucun joueur trouvé"
   }
 }

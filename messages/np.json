@@ -14,13 +14,8 @@
     "image": "तस्वीर",
     "music": "संगीत",
     "code": "कोड",
-    "greeting": "नमस्ते, {name}",
-    "email": "{email}",
     "userName": "जोन डो",
     "userEmail": "john@example.com",
-    "toggleTheme": "थिम परिवर्तन गर्नुहोस्",
-    "openUserMenu": "प्रयोगकर्ता मेनु खोल्नुहोस्",
-    "switchLanguage": "भाषा परिवर्तन गर्नुहोस्",
     "stats": "तथ्याङ्क"
   },
   "Dashboard": {
@@ -40,7 +35,7 @@
     "title": "तथ्याङ्क ड्यासबोर्ड",
     "searchPlaceholder": "स्टीम आईडी वा प्रयोगकर्ता नाम द्वारा खोज्नुहोस्",
     "steamId": "स्टीम आईडी",
-    "username": "प्रयोगकर्ता नाम",
+    "statUsername": "प्रयोगकर्ता नाम",
     "loading": "लोड हुँदैछ...",
     "searchResults": "खोज परिणामहरू:",
     "viewStats": "तथ्याङ्क हेर्नुहोस्",
@@ -83,6 +78,7 @@
     "kills": "Kill",
     "deaths": "Deaths",
     "assists": "Assists",
-    "apply": "अप्लाई"
+    "apply": "अप्लाई",
+    "noPlayersFound": "कुनै प्रयोगकर्ता फेला पर्दैन"
   }
 }
