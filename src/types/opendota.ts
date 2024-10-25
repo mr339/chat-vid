@@ -29,3 +29,20 @@ export interface RecentMatch {
   leaver_status: number;
   party_size: number;
 }
+
+export interface Player {
+  account_id: number;
+  personaname: string;
+  name: string | null;
+  plus: boolean;
+  cheese: number;
+  steamid: string;
+  avatar: string;
+  avatarmedium: string;
+  avatarfull: string;
+  profileurl: string;
+  last_login: string;
+  loccountrycode: string | null;
+  status: null | string;
+  is_pro: boolean;
+}

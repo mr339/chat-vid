@@ -1,7 +1,6 @@
 import { Hero, RecentMatch } from "@/types/opendota";
 
 const BASE_URL = process.env.NEXT_PUBLIC_OPENDOTA_API_URL?.replace(/\/$/, "");
-console.log("BASE_URL", BASE_URL);
 
 export async function searchPlayers(query: string) {
   const response = await fetch(
@@ -56,6 +55,5 @@ export const getHeroes = async (): Promise<Hero[]> => {
     throw new Error("Failed to fetch heroes");
   }
   const data = await response.json();
-  console.log("Hero data:", data[0]); // Log the first hero to see its structure
   return data;
 };

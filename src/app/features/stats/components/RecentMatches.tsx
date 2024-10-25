@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { RecentMatch, Hero } from "@/types/opendota";
 import { formatDuration, formatTimeAgo } from "@/utils/dateUtils";
@@ -22,8 +22,9 @@ import {
 } from "@/components/ui/pagination";
 import { Button } from "@/components/ui/button";
 import { useRecentMatches } from "@/hooks/useRecentMatches.hook";
-import { SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal, X } from "lucide-react";
 import FilterPopup from "./FilterPopup";
+import { useFilterStore, GameLength } from "@/stores/filterStore";
 
 interface RecentMatchesProps {
   matches: RecentMatch[];
@@ -34,17 +35,117 @@ const RecentMatches: React.FC<RecentMatchesProps> = ({ matches, heroes }) => {
   const t = useTranslations("StatsPages");
   const [isFilterPopupOpen, setIsFilterPopupOpen] = useState(false);
   const {
+    selectedLength,
+    selectedHero,
+    selectedDeath,
+    selectedKills,
+    selectedAssists,
+    setSelectedLength,
+    setSelectedHero,
+    setSelectedDeath,
+    setSelectedKills,
+    setSelectedAssists,
+  } = useFilterStore();
+
+  const {
     currentPage,
     setCurrentPage,
     activeFilters,
     toggleFilter,
-    filteredMatches,
     currentMatches,
     totalPages,
     isWin,
     getTeamImage,
     getHeroName,
+    filteredMatches,
   } = useRecentMatches({ matches, heroes });
+
+  const renderActiveFilters = () => {
+    const filters = [];
+
+    if (selectedLength) {
+      filters.push(
+        <Button
+          key="length"
+          variant="outline"
+          size="sm"
+          onClick={() => setSelectedLength(null)}
+          className="px-2 py-1 text-xs font-medium"
+        >
+          {selectedLength === "under20"
+            ? "Under 20 minutes"
+            : selectedLength === "20to40"
+            ? "20 - 40 minutes"
+            : selectedLength === "40to60"
+            ? "40 - 60 minutes"
+            : "Over 60 minutes"}
+          <X className="ml-2 h-3 w-3" />
+        </Button>
+      );
+    }
+
+    if (selectedHero !== null) {
+      filters.push(
+        <Button
+          key="hero"
+          variant="outline"
+          size="sm"
+          onClick={() => setSelectedHero(null)}
+          className="px-2 py-1 text-xs font-medium"
+        >
+          {getHeroName(selectedHero)}
+          <X className="ml-2 h-3 w-3" />
+        </Button>
+      );
+    }
+
+    if (selectedDeath) {
+      filters.push(
+        <Button
+          key="death"
+          variant="outline"
+          size="sm"
+          onClick={() => setSelectedDeath(null)}
+          className="px-2 py-1 text-xs font-medium"
+        >
+          Deaths: {selectedDeath}
+          <X className="ml-2 h-3 w-3" />
+        </Button>
+      );
+    }
+
+    if (selectedKills) {
+      filters.push(
+        <Button
+          key="kills"
+          variant="outline"
+          size="sm"
+          onClick={() => setSelectedKills(null)}
+          className="px-2 py-1 text-xs font-medium"
+        >
+          Kills: {selectedKills}
+          <X className="ml-2 h-3 w-3" />
+        </Button>
+      );
+    }
+
+    if (selectedAssists) {
+      filters.push(
+        <Button
+          key="assists"
+          variant="outline"
+          size="sm"
+          onClick={() => setSelectedAssists(null)}
+          className="px-2 py-1 text-xs font-medium"
+        >
+          Assists: {selectedAssists}
+          <X className="ml-2 h-3 w-3" />
+        </Button>
+      );
+    }
+
+    return filters;
+  };
 
   return (
     <div className="mt-6 text-foreground">
@@ -81,6 +182,10 @@ const RecentMatches: React.FC<RecentMatchesProps> = ({ matches, heroes }) => {
           {t("filters")}
         </Button>
       </div>
+
+      {/* Active Filters */}
+      <div className="flex flex-wrap gap-2 mb-4">{renderActiveFilters()}</div>
+
       {filteredMatches.length > 0 ? (
         <>
           <Table className="border-collapse border border-gray-200 dark:border-gray-700">
