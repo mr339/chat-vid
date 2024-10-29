@@ -19,6 +19,7 @@ interface SearchSectionProps {
   handleSearch: (event: React.FormEvent<HTMLFormElement>) => void;
   handleReset: () => void;
   isLoading: boolean;
+  setHasSearched: (value: boolean) => void;
 }
 
 const SearchSection: React.FC<SearchSectionProps> = ({
@@ -29,11 +30,22 @@ const SearchSection: React.FC<SearchSectionProps> = ({
   handleSearch,
   handleReset,
   isLoading,
+  setHasSearched,
 }) => {
   const t = useTranslations("StatsPages");
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setHasSearched(true);
+    handleSearch(event);
+  };
+
+  const handleResetSearch = () => {
+    setHasSearched(false);
+    handleReset();
+  };
+
   return (
-    <form onSubmit={handleSearch} className="mb-6">
+    <form onSubmit={handleSubmit} className="mb-6">
       <div className="flex">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -64,13 +76,13 @@ const SearchSection: React.FC<SearchSectionProps> = ({
             className="w-full bg-input text-foreground rounded-r-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary pr-10"
             disabled={isLoading}
           />
-          {searchTerm && !isLoading && (
+          {!isLoading && (
             <Button
               type="button"
               variant="ghost"
               size="icon"
               className="absolute right-1 top-1/2 transform -translate-y-1/2 text-foreground hover:bg-accent hover:text-accent-foreground"
-              onClick={handleReset}
+              onClick={handleResetSearch}
             >
               <X className="h-4 w-4" />
             </Button>

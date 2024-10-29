@@ -15,6 +15,7 @@ const StatsPage: React.FC = () => {
   const [searchResults, setSearchResults] = useState<Player[]>([]);
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -37,6 +38,7 @@ const StatsPage: React.FC = () => {
     setSearchTerm("");
     setSearchResults([]);
     setSelectedPlayer(null);
+    setHasSearched(false);
   };
 
   return (
@@ -54,6 +56,7 @@ const StatsPage: React.FC = () => {
           handleSearch={handleSearch}
           handleReset={handleReset}
           isLoading={isLoading}
+          setHasSearched={setHasSearched}
         />
 
         {isLoading && (
@@ -68,6 +71,7 @@ const StatsPage: React.FC = () => {
             searchResults={searchResults}
             selectedPlayer={selectedPlayer}
             setSelectedPlayer={setSelectedPlayer}
+            hasSearched={hasSearched}
           />
         )}
       </div>
